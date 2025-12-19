@@ -13,6 +13,7 @@ import {
 import MaterialDetailForm from "../../../../components/sections/materialDetailPage/MaterialDetailForm";
 
 import styles from "../../../../components/scss/MaterialDetail.module.scss";
+import { gaEvent } from "src/lib/ga";
 
 export type ProductCardProps = {
   id: string;
@@ -103,6 +104,20 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
+    if (!product) return;
+    gaEvent("view_item", {
+      items: [
+        {
+          item_id: product.id,
+          item_name: product.name,
+          item_category: product.categories?.map((cat) => cat.name).join(", "),
+          item_company: product.company.join(", "),
+        },
+      ],
+    });
+  }, [product?.id]);
+
+  useEffect(() => {
     const handleResize = () => {
       setOrientation(
         window.innerWidth > 1306 || window.innerWidth < 768
@@ -130,6 +145,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
       const productSlug = Array.isArray(slug) ? slug[0] : slug;
       fetchMaterialBySlug(productSlug as string)
         .then((mappedProduct) => {
+          console.log("Fetched product data:", mappedProduct);
           setProduct(mappedProduct);
         })
 
@@ -235,9 +251,8 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
         <div className={styles.materialInfoContainer}>
           <h1>{product.name}</h1>
-          {product.company.includes(
-            "MRC Rock & Sand" || "Santa Paula Materials",
-          ) ? (
+          {product.company.includes("MRC Rock & Sand") ||
+          product.company.includes("Santa Paula Materials") ? (
             <>
               <h3>
                 Categories:
