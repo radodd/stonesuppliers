@@ -13,6 +13,7 @@
     "dev": "concurrently \"npm run dev:api\" \"npm run dev:frontend\""
   },
   "dependencies": {
+    "@next/third-parties": "^16.0.10",
     "@radix-ui/react-checkbox": "^1.1.1",
     "@radix-ui/react-radio-group": "^1.2.0",
     "@supabase/supabase-js": "^2.45.4",

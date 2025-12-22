@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Open_Sans, Montserrat, Roboto } from "next/font/google";
 import "./globals.css";
 import { cn } from "../lib/utils";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 import { Providers } from "../components/Providers";
 import { Toaster } from "../components/ui/toaster";
@@ -125,6 +126,7 @@ export default function RootLayout({
         <Toaster />
         <Footer />
       </body>
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
     </html>
   );
 }
