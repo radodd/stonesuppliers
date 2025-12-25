@@ -1,0 +1,91 @@
+@use "../../css/queries.scss";
+@import "../../css/queries.scss";
+
+.Toast {
+  @include small-break {
+    width: 300px;
+    height: 300px;
+    padding: 20px 20px;
+  }
+}
+
+.toastContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: descriptionpx;
+  @include mid-break {
+    gap: 40px;
+  }
+  @include large-break {
+    gap: 40px;
+  }
+}
+
+.imageContainer {
+  background-color: hsl(var(--primary));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  width: 50px;
+  height: 50px;
+  @include mid-break {
+    width: 88px;
+    height: 88px;
+  }
+  @include large-break {
+    width: 88px;
+    height: 88px;
+  }
+}
+
+.image {
+  width: 30px;
+  height: 30px;
+  @include mid-break {
+    width: 48px;
+    height: 48px;
+  }
+  @include large-break {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+.title {
+  font-size: 24px;
+  @include mid-break {
+    font-size: 36px;
+  }
+  @include large-break {
+    font-size: 36px;
+  }
+}
+
+.description {
+  font-size: 16px;
+  @include mid-break {
+    font-size: 20px;
+  }
+  @include large-break {
+    font-size: 20px;
+  }
+}
+
+.viewport {
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // margin: 30px;
+  // padding: 30px;
+
+  /* Fixed to the viewport */
+  top: 50%; /* Move to 50% from the top */
+  left: 0%; /* Move to 50% from the left */
+  // transform: translate(-50%, -50%);
+  // top: 40%;
+  // // left: 8%;
+  // transform: translate(-50%, -50%);
+}
