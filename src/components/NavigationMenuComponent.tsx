@@ -62,10 +62,10 @@ const MobileNavMenu = ({
 
       <SheetContent hideChevron={true} className="w-[300px]">
         <nav className={styles.sheet}>
-          <NavLink href="/about">About</NavLink>
+          <MobileNavLink href="/about">About</MobileNavLink>
           <MaterialsDropdown handleMaterialDetail={handleMaterialDetail} />
-          <NavLink href="/services">Services</NavLink>
-          <NavLink href="/contact">Contact</NavLink>
+          <MobileNavLink href="/services">Services</MobileNavLink>
+          <MobileNavLink href="/contact">Contact</MobileNavLink>
         </nav>
 
         <SheetHeader>
@@ -184,14 +184,20 @@ const MaterialSection = ({
 );
 
 /** A reusable link component for navigation items */
-const NavLink = ({ href, children }: { href: string; children: ReactNode }) => (
+const MobileNavLink = ({
+  href,
+  children,
+}: {
+  href: string;
+  children: ReactNode;
+}) => (
   <Link href={href} className={styles.navLink}>
     {children}
   </Link>
 );
 
 /** The main CustomerFacingNav component */
-export function CustomerFacingNav2({ children }: { children: ReactNode }) {
+export function NavigationMenuComponent({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const { cartItems, cartItemCounter } = useCart();
   const router = useRouter();
@@ -239,7 +245,7 @@ export function CustomerFacingNav2({ children }: { children: ReactNode }) {
 
         {/* Mobile Navigation */}
         <div className={styles.mobileNavContainer}>
-          <CustomerFacingNavLink href="/cart">
+          <DeskTopNavLink href="/cart">
             <Image
               src="/shopping_cart.svg"
               alt="shopping cart"
@@ -251,7 +257,7 @@ export function CustomerFacingNav2({ children }: { children: ReactNode }) {
             {cartItemCounter > 0 && (
               <span className={styles.cartCounter}>{cartItemCounter}</span>
             )}
-          </CustomerFacingNavLink>
+          </DeskTopNavLink>
           <MobileNavMenu
             isOpen={isOpen}
             setIsOpen={setIsOpen}
@@ -264,7 +270,7 @@ export function CustomerFacingNav2({ children }: { children: ReactNode }) {
 }
 
 /** A reusable customer-facing nav link component */
-export function CustomerFacingNavLink(
+export function DeskTopNavLink(
   props: Omit<ComponentProps<typeof Link>, "className">,
 ) {
   const pathname = usePathname();

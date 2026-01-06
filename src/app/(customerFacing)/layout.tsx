@@ -14,7 +14,7 @@ import {
 } from "../../lib";
 import { useFilter } from "../../context/FilterContext";
 import { cn } from "../../lib/utils";
-import { CustomerFacingNavLink } from "../../components/CustomerFacingNav";
+import { DeskTopNavLink } from "../../components/NavigationMenuComponent";
 import { Footer } from "../../components/Footer";
 import {
   NavigationMenu,
@@ -24,7 +24,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "../../components/ui/navigation-menu";
-import { CustomerFacingNav2 } from "../../components/CustomerFacingNav2";
+import { NavigationMenuComponent } from "../../components/NavigationMenuComponent";
 import { ClientOnly } from "../../lib/ClientOnly";
 import { useCart } from "../../context/CartContext";
 
@@ -114,7 +114,7 @@ export default function Layout({
 
   return (
     <>
-      <CustomerFacingNav2>
+      <NavigationMenuComponent>
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem onMouseEnter={() => setIsMaterialsOpen(true)}>
@@ -137,12 +137,10 @@ export default function Layout({
           </NavigationMenuList>
         </NavigationMenu>
         <ClientOnly>
-          <CustomerFacingNavLink href="/about">About</CustomerFacingNavLink>
-          <CustomerFacingNavLink href="/services">
-            Services
-          </CustomerFacingNavLink>
-          <CustomerFacingNavLink href="/contact">Contact</CustomerFacingNavLink>
-          <CustomerFacingNavLink href="/cart">
+          <DeskTopNavLink href="/about">About</DeskTopNavLink>
+          <DeskTopNavLink href="/services">Services</DeskTopNavLink>
+          <DeskTopNavLink href="/contact">Contact</DeskTopNavLink>
+          <DeskTopNavLink href="/cart">
             <ShoppingCart
               className={`${pathname === "/cart" && "fill-primary-dark"} min-w-[33px] hover:fill-primary-dark`}
             />
@@ -152,9 +150,9 @@ export default function Layout({
                 {cartItemCounter}
               </span>
             )}
-          </CustomerFacingNavLink>
+          </DeskTopNavLink>
         </ClientOnly>
-      </CustomerFacingNav2>
+      </NavigationMenuComponent>
 
       <div>{children}</div>
       {/* <Footer> */}
