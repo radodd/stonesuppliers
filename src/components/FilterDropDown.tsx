@@ -12,7 +12,7 @@ import {
   AllCompanies,
   AllSizes,
   AllTextures,
-} from "../..";
+} from "../lib";
 import { Button } from "./ui/button";
 
 import styles from "../components/scss/FilterDropDown.module.scss";

@@ -12,7 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import CarouselIndicator from "@/components/ui/CarouselIndicator";
 import { Button } from "@/components/ui/button";
-import { Articles } from "../../../..";
+import { Articles } from "../../../lib";
 
 import styles from "@/components/scss/NewsArticles.module.scss";
 

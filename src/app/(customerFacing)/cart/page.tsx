@@ -1,6 +1,6 @@
 "use client";
 
-import { HOWTOUSE } from "../../../../index";
+import { HOWTOUSE } from "../../../lib/index";
 import {
   Accordion,
   AccordionContent,

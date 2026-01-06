@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ContactForm2 from "../../../components/form/ContactForm2";
-import { CompanyAddresses, ContactInfo } from "../../../..";
+import { CompanyAddresses, ContactInfo } from "../../../lib";
 
 import style from "./ContactPage.module.scss";
 import ContactSEOContent from "@/components/SEO/ContactSEOContent";

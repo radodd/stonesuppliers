@@ -2,8 +2,8 @@ import ContactUs from "../../../components/sections/ContactUs";
 import { Button } from "../../../components/ui/button";
 import Image from "next/image";
 import React from "react";
-import { ServicesMRC } from "../../../..";
-import { ServicesSPM } from "../../../..";
+import { ServicesMRC } from "../../../lib";
+import { ServicesSPM } from "../../../lib";
 
 import styles from "./Services.module.scss";
 

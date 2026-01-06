@@ -17,7 +17,7 @@ import {
   AllTextures,
   AllColors,
   AllSizes,
-} from "../../index";
+} from "../lib/index";
 
 import styles from "./scss/ProductGridSection.module.scss";
 
@@ -295,7 +295,7 @@ export default function ProductGridSection({ title }: ProductGridSectionProps) {
   };
 
   const clearAllFilters = () => {
-    setFilterValueList([]), setTempFilterValueList([]);
+    (setFilterValueList([]), setTempFilterValueList([]));
   };
 
   return (

@@ -1,4 +1,4 @@
-import { RequestQuoteCards } from "../../../..";
+import { RequestQuoteCards } from "../../../lib";
 import Image from "next/image";
 import {
   Carousel,

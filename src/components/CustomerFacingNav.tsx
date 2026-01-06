@@ -17,8 +17,8 @@ import {
 import { ChevronDown } from "lucide-react";
 import { NavigationMenuLink } from "./ui/navigation-menu";
 import { Separator } from "./ui/separator";
-import { ArtisanalStone } from "../..";
-import ChevronNavSharp from "@/public/chevron_nav_sharp.svg";
+import { ArtisanalStone } from "../lib";
+import ChevronNavSharp from "../../public/chevron_nav_sharp.svg";
 
 import styles from "./scss/CustomerFacingNav.module.scss";
 import { useFilter } from "../context/FilterContext";

@@ -14,7 +14,7 @@ import Slider from "@/components/SliderAnimation";
 import Image from "next/image";
 
 import styles from "@/components/scss/LandingPageCarousel2.module.scss";
-import { LandingPageCarousel } from "../../../..";
+import { LandingPageCarousel } from "../../../lib";
 import CarouselIndicator from "@/components/ui/CarouselIndicator";
 import { useFilter } from "../../../context/FilterContext";
 

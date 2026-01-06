@@ -8,7 +8,7 @@ import {
   AccordionContent,
 } from "../../../components/ui/accordion";
 import Image from "next/image";
-import { HISTORY } from "../../../..";
+import { HISTORY } from "../../../lib";
 import { useEffect } from "react";
 
 import styles from "./styles.module.scss";

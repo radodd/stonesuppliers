@@ -22,7 +22,7 @@ import {
   MRCandSPMMaterials,
   MaterialID,
   SantaPaulaMaterials,
-} from "../..";
+} from "../lib";
 
 import styles from "./scss/CustomerFacingNav.module.scss";
 import { useCart } from "../context/CartContext";

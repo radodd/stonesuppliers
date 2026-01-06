@@ -4,14 +4,14 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import ChevronNavSharp from "@/public/chevron_nav_sharp.svg";
-import ShoppingCart from "@/public/shopping_cart.svg";
+import ChevronNavSharp from "../../../public/chevron_nav_sharp.svg";
+import ShoppingCart from "/public/shopping_cart.svg";
 import {
   ArtisanalStone,
   MRCandSPMMaterials,
   MaterialID,
   SantaPaulaMaterials,
-} from "../../..";
+} from "../../lib";
 import { useFilter } from "../../context/FilterContext";
 import { cn } from "../../lib/utils";
 import { CustomerFacingNavLink } from "../../components/CustomerFacingNav";

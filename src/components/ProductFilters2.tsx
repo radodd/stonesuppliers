@@ -12,7 +12,7 @@ import {
   AllCompanies,
   AllSizes,
   AllTextures,
-} from "../..";
+} from "../lib";
 
 import styles from "./scss/ProductFilters.module.scss";
 import { useState } from "react";

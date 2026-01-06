@@ -4,7 +4,7 @@ import * as React from "react";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { cva, type VariantProps } from "class-variance-authority";
 import { ChevronDown, X } from "lucide-react";
-import ChevronNavSharp from "@/public/chevron_nav_sharp.svg";
+import ChevronNavSharp from "../../../public/chevron_nav_sharp.svg";
 
 import { cn } from "../../lib/utils";
 
@@ -20,8 +20,9 @@ const SheetClose = SheetPrimitive.Close;
 
 const SheetPortal = SheetPrimitive.Portal;
 
-interface SheetOverlayProps
-  extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay> {
+interface SheetOverlayProps extends React.ComponentPropsWithoutRef<
+  typeof SheetPrimitive.Overlay
+> {
   hideOverlay?: boolean;
 }
 const SheetOverlay = React.forwardRef<
@@ -61,7 +62,8 @@ const sheetVariants = cva(
 );
 
 interface SheetContentProps
-  extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
+  extends
+    React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
     VariantProps<typeof sheetVariants> {
   hideChevron?: boolean;
   hideOverlay?: boolean;
