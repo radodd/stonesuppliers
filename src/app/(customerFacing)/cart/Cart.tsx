@@ -1,11 +1,11 @@
-import { useCart } from "@/src/context/CartContext";
+import { useCart } from "@/context/CartContext";
 import { FormProvider, useForm } from "react-hook-form";
 
 import style from "@/components/scss/CartPage.module.scss";
 
-import { Button } from "@/src/components/ui/button";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Input } from "@/src/components/ui/input";
+import { Input } from "@/components/ui/input";
 
 const Cart = () => {
   const { cartItems, setCartItems } = useCart();

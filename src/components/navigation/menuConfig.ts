@@ -2,7 +2,7 @@ import {
   ArtisanalStone,
   MRCandSPMMaterials,
   SantaPaulaMaterials,
-} from "@/lib/index";
+} from "@/data";
 
 export type MaterialGroup = "stoneyard" | "mrc" | "spm";
 

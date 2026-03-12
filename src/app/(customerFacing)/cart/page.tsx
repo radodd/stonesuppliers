@@ -11,7 +11,7 @@ import { Button } from "../../../components/ui/button";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { Input } from "../../../components/ui/input";
-import ContactForm2 from "../../../components/form/ContactForm2";
+import ContactForm from "../../../components/form/ContactForm";
 import { useCart } from "../../../context/CartContext";
 import Image from "next/image";
 
@@ -69,7 +69,7 @@ export default function CartPage() {
             </AccordionTrigger>
             <AccordionContent>
               <div className={style.padding}>
-                <ContactForm2 cartItems={cartItems} />
+                <ContactForm cartItems={cartItems} />
               </div>
             </AccordionContent>
           </AccordionItem>{" "}

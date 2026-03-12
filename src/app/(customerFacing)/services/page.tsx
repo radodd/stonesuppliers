@@ -10,7 +10,7 @@ import styles from "./Services.module.scss";
 const page = () => {
   return (
     <div className="flex flex-col">
-      <div className="relative w-full h-[658px]  xlScreen:h-[800px] max-mobile:h-[480px] max-smMobie:h-[254px] overflow-hidden">
+      <div className="relative w-full h-[658px]  xlScreen:h-[800px] max-mobile:h-[480px] max-smMobile:h-[254px] overflow-hidden">
         <Image
           src="/Service Hero Section Image.svg"
           alt="hero Image"
@@ -25,7 +25,7 @@ const page = () => {
         </h1>
         {/* Visible content, hidden from screen readers */}
         <h2
-          className="absolute text-whitebase font-bold text-[64px] max-smMobie:text-[40px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          className="absolute text-whitebase font-bold text-[64px] max-smMobile:text-[40px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
           aria-hidden
         >
           Services
@@ -35,7 +35,7 @@ const page = () => {
       <div className="flex flex-col bg-primary xlScreen:mb-20">
         <h2
           id="SPM"
-          className="font-bold text-whitebase text-[40px] my-6 px-[72px] max-smMobie:px-[32px] xlScreen:px-36 max-smMobie:text-[32px]"
+          className="font-bold text-whitebase text-[40px] my-6 px-[72px] max-smMobile:px-[32px] xlScreen:px-36 max-smMobile:text-[32px]"
         >
           Santa Paula Materials
         </h2>
@@ -58,12 +58,12 @@ const page = () => {
               />
             </div>
             {/* border-2 border-red-500 flex flex-col gap-10 w-1/2 max-mobile:w-full
-            p-12 max-smMobie:px-8 xlScreen:px-36 */}
-            <div className="flex-col flex gap-10 w-1/2 py-12 px-[72px] max-smMobie:px-8 xlScreen:px-36 max-mobile:w-full justify-center">
-              <h1 className="font-bold text-[32px] max-smMobie:text-2xl text-primary-text">
+            p-12 max-smMobile:px-8 xlScreen:px-36 */}
+            <div className="flex-col flex gap-10 w-1/2 py-12 px-[72px] max-smMobile:px-8 xlScreen:px-36 max-mobile:w-full justify-center">
+              <h1 className="font-bold text-[32px] max-smMobile:text-2xl text-primary-text">
                 {materials.name}
               </h1>
-              <p className="text-[20px] w-full text-secondary-text max-smMobie:text-base self-stretch">
+              <p className="text-[20px] w-full text-secondary-text max-smMobile:text-base self-stretch">
                 {materials.desc}
               </p>
               <div className="flex ">
@@ -83,7 +83,7 @@ const page = () => {
       <div className="flex flex-col bg-primary mb-20 max-mobile:mb-16">
         <h2
           id="MRC"
-          className="font-bold text-whitebase text-[40px] my-6 px-[72px] max-smMobie:px-[32px] xlScreen:px-36 max-smMobie:text-[32px]"
+          className="font-bold text-whitebase text-[40px] my-6 px-[72px] max-smMobile:px-[32px] xlScreen:px-36 max-smMobile:text-[32px]"
         >
           MRC Rock & Sand
         </h2>
@@ -106,11 +106,11 @@ const page = () => {
                 className={styles.image}
               />
             </div>
-            <div className="flex-col flex gap-10 w-1/2 py-12 px-[72px] max-smMobie:px-8 xlScreen:px-36 max-mobile:w-full justify-center">
-              <h2 className="font-bold text-[32px] max-smMobie:text-2xl text-primary-text">
+            <div className="flex-col flex gap-10 w-1/2 py-12 px-[72px] max-smMobile:px-8 xlScreen:px-36 max-mobile:w-full justify-center">
+              <h2 className="font-bold text-[32px] max-smMobile:text-2xl text-primary-text">
                 {service.name}
               </h2>
-              <p className="text-[20px] w-full text-secondary-text max-smMobie:text-base self-stretch">
+              <p className="text-[20px] w-full text-secondary-text max-smMobile:text-base self-stretch">
                 {service.desc}
               </p>
               {/* {service.id == 2 && (

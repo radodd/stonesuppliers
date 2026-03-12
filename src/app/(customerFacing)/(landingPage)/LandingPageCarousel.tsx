@@ -13,12 +13,12 @@ import { useEffect, useState } from "react";
 import Slider from "@/components/SliderAnimation";
 import Image from "next/image";
 
-import styles from "@/scss/LandingPageCarousel2.module.scss";
+import styles from "@/scss/LandingPageCarousel.module.scss";
 import { LandingPageCarousel } from "@/data";
 import CarouselIndicator from "@/components/ui/CarouselIndicator";
 import { useFilter } from "../../../context/FilterContext";
 
-export default function LandingPageCarousel2() {
+export default function LandingPageCarousel() {
   const [current, setCurrent] = useState(-1);
   const [api, setApi] = useState<CarouselApi | null>(null);
   const [windowWidth, setWindowWidth] = useState(

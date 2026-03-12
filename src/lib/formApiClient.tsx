@@ -1,5 +1,5 @@
-import { FormValues } from "../../lib/formTypes";
-import EmailTemplate from "../EmailTemplate";
+import { FormValues } from "./formTypes";
+import EmailTemplate from "../components/EmailTemplate";
 import ReactDOMServer from "react-dom/server";
 
 export const sendFormData = async (formData: FormValues) => {

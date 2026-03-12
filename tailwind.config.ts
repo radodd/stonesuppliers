@@ -23,8 +23,7 @@ const config = {
       },
       screens: {
         mobile: "1306px",
-        // Fix Typo
-        smMobie: "769px",
+        smMobile: "769px",
         // Make sure your names make sense and there is uniformity
         xlScreen: "1601px",
       },

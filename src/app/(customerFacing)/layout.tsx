@@ -14,7 +14,7 @@ import {
 } from "@/data";
 import { useFilter } from "../../context/FilterContext";
 import { cn } from "../../lib/utils";
-import { CustomerFacingNavLink } from "../../components/CustomerFacingNav2";
+import { CustomerFacingNavLink } from "../../components/CustomerFacingNav";
 import { Footer } from "../../components/Footer";
 import {
   NavigationMenu,
@@ -24,7 +24,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "../../components/ui/navigation-menu";
-import { CustomerFacingNav2 } from "../../components/CustomerFacingNav2";
+import { CustomerFacingNav } from "../../components/CustomerFacingNav";
 import { ClientOnly } from "../../lib/ClientOnly";
 import { useCart } from "../../context/CartContext";
 
@@ -104,7 +104,7 @@ export default function Layout({
 
   return (
     <>
-      <CustomerFacingNav2>
+      <CustomerFacingNav>
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem onMouseEnter={() => setIsMaterialsOpen(true)}>
@@ -144,7 +144,7 @@ export default function Layout({
             )}
           </CustomerFacingNavLink>
         </ClientOnly>
-      </CustomerFacingNav2>
+      </CustomerFacingNav>
 
       <div>{children}</div>
     </>

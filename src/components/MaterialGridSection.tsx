@@ -2,10 +2,10 @@
 
 import { useFilter } from "../context/FilterContext";
 import { ProductCard } from "./MaterialCard";
-import { ProductFilterCard } from "./ProductFilterCard";
+import { MaterialFilterCard } from "./MaterialFilterCard";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
-import { ProductFilters2 } from "./ProductFilters2";
+import { ProductFilters } from "./ProductFilters";
 import Image from "next/image";
 import FilterDropDown from "./FilterDropDown";
 import AlphabetizeButtons from "./AlphabetizeButtons";
@@ -19,9 +19,9 @@ import {
   AllSizes,
 } from "@/data";
 
-import styles from "./scss/ProductGridSection.module.scss";
+import styles from "./scss/MaterialGridSection.module.scss";
 
-interface Product {
+interface Material {
   id: string;
   slug: string;
   name: string;
@@ -35,11 +35,11 @@ interface Product {
   size: string[];
 }
 
-type ProductGridSectionProps = {
+type MaterialGridSectionProps = {
   title: string;
 };
 
-export default function ProductGridSection({ title }: ProductGridSectionProps) {
+export default function MaterialGridSection({ title }: MaterialGridSectionProps) {
   const {
     filterValueList,
     setFilterValueList,
@@ -47,7 +47,7 @@ export default function ProductGridSection({ title }: ProductGridSectionProps) {
     setTempFilterValueList,
     tempFilterValueList,
   } = useFilter();
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Material[]>([]);
   const [alphabetFilter, setAlphabetFilter] = useState(false);
   const [filterDropDown, setFilterDropdown] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -318,12 +318,12 @@ export default function ProductGridSection({ title }: ProductGridSectionProps) {
         <div className={styles.productFilterCardContainer}>
           {filterValueList.length === 0 ||
           (filterValueList.length === 1 && filterValueList[0] === "") ? (
-            <ProductFilterCard filter="All Materials" />
+            <MaterialFilterCard filter="All Materials" />
           ) : (
             filterValueList
               .filter((filter) => filter && filter.length > 0)
               .map((filter, index) => (
-                <ProductFilterCard
+                <MaterialFilterCard
                   key={index}
                   filter={filter}
                   onRemove={handleRemoveFilter}
@@ -433,7 +433,7 @@ export default function ProductGridSection({ title }: ProductGridSectionProps) {
               />
             </Button>
           )}
-          <ProductFilters2
+          <ProductFilters
             filterValueList={filterValueList}
             setFilterValueList={setFilterValueList}
             clearFilter={clearFilter}
@@ -449,14 +449,14 @@ export default function ProductGridSection({ title }: ProductGridSectionProps) {
           <div className="flex flex-row">
             <div className={styles.productFilterCardContainerDesktop}>
               {filterValueList.map((filter, index) => (
-                <ProductFilterCard
+                <MaterialFilterCard
                   key={index}
                   filter={filter}
                   onRemove={handleRemoveFilter}
                 />
               ))}
               {filterValueList.length === 0 && (
-                <ProductFilterCard
+                <MaterialFilterCard
                   filter="All Materials"
                   onRemove={handleRemoveFilter}
                 />

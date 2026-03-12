@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import ContactForm2 from "../../../components/form/ContactForm2";
+import ContactForm from "../../../components/form/ContactForm";
 import { CompanyAddresses, ContactInfo } from "@/data";
 
 import style from "./ContactPage.module.scss";
@@ -23,7 +23,7 @@ const ContactPage = () => {
       </h2>
       <div className={style.contactAndFormContainer}>
         <ContactInformation />
-        <ContactForm2 />
+        <ContactForm />
       </div>
       <div className={style.addressContainer}>
         {CompanyAddresses.map((companyAddress, index) => (

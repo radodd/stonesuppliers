@@ -191,7 +191,7 @@ const NavLink = ({ href, children }: { href: string; children: ReactNode }) => (
 );
 
 /** The main CustomerFacingNav component */
-export function CustomerFacingNav2({ children }: { children: ReactNode }) {
+export function CustomerFacingNav({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const { cartItems, cartItemCounter } = useCart();
   const router = useRouter();

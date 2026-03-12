@@ -14,7 +14,7 @@ import {
   AllTextures,
 } from "@/data";
 
-import styles from "./scss/ProductFilters.module.scss";
+import styles from "./scss/MaterialFilters.module.scss";
 import { useState } from "react";
 import { useFilter } from "../context/FilterContext";
 import { Button } from "./ui/button";
@@ -79,7 +79,7 @@ const FilterItem: React.FC<FilterItemProps> = ({
   </li>
 );
 
-export const ProductFilters2: React.FC<{
+export const ProductFilters: React.FC<{
   filterValueList: string[];
   setFilterValueList: React.Dispatch<React.SetStateAction<string[]>>;
   clearFilter: (value: string) => void;

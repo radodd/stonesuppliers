@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "./ui/button";
-import sortProducts from "../lib/sortProducts";
+import sortMaterials from "../lib/sortMaterials";
 import Image from "next/image";
 
 const AlphabetizeButtons = ({
@@ -10,7 +10,7 @@ const AlphabetizeButtons = ({
   setAlphabetFilter,
 }) => {
   const handleSort = (direction) => {
-    const sortedList = sortProducts(products, direction);
+    const sortedList = sortMaterials(products, direction);
     setProducts(sortedList);
   };
   return (

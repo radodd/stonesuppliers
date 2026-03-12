@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { FormValues } from "./../../lib/formTypes";
-import { sendFormData } from "./apiClient";
+import { sendFormData } from "../../lib/formApiClient";
 import { useToast } from "./../ui/use-toast";
 import { useScreenSize } from "./../../lib/useScreenSize";
 import { useState } from "react";

@@ -1,4 +1,4 @@
-import styles from "../scss/LandingPageCarousel2.module.scss";
+import styles from "../scss/LandingPageCarousel.module.scss";
 
 const CarouselIndicator = ({
   current,

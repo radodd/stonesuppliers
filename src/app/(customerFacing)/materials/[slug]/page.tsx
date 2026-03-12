@@ -13,7 +13,7 @@ import {
 import MaterialDetailForm from "../../../../components/sections/materialDetailPage/MaterialDetailForm";
 
 import styles from "../../../../components/scss/MaterialDetail.module.scss";
-import { gaEvent } from "src/lib/ga";
+import { gaEvent } from "@/lib/ga";
 
 export type ProductCardProps = {
   id: string;

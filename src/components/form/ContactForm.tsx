@@ -2,7 +2,6 @@
 
 import React, { useEffect } from "react";
 import { Button } from "../ui/button";
-import ToastModal from "../ToastModal";
 import TextInput from "./TextInput";
 import SelectInput, { positionOptions } from "./SelectInput";
 import TextAreaInput from "./TextAreaInput";
@@ -17,7 +16,7 @@ type ContactFormProps = {
   cartItems?: any;
 };
 
-const ContactForm2: React.FC<ContactFormProps> = ({
+const ContactForm: React.FC<ContactFormProps> = ({
   buttonText = "Submit",
   cartItems,
 }) => {
@@ -27,7 +26,6 @@ const ContactForm2: React.FC<ContactFormProps> = ({
     errors,
     onSubmit,
     openModal,
-    isScreenSmall,
     watch,
     trigger,
     setValue,
@@ -104,9 +102,8 @@ const ContactForm2: React.FC<ContactFormProps> = ({
           {buttonText}
         </Button>
       </form>
-      {isScreenSmall && openModal && <ToastModal />}
     </div>
   );
 };
 
-export default ContactForm2;
+export default ContactForm;

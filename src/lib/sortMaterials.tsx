@@ -1,4 +1,4 @@
-const sortProducts = (products, direction = "asc") => {
+const sortMaterials = (products, direction = "asc") => {
   return [...products].sort((a, b) => {
     const nameA = a.name.toLowerCase();
     const nameB = b.name.toLowerCase();
@@ -13,4 +13,4 @@ const sortProducts = (products, direction = "asc") => {
   });
 };
 
-export default sortProducts;
+export default sortMaterials;

@@ -1,16 +1,16 @@
 import { Button } from "./ui/button";
 import Image from "next/image";
-import styles from "../components/scss/ProductFilterCards.module.scss";
+import styles from "../components/scss/MaterialFilterCards.module.scss";
 import { useFilter } from "../context/FilterContext";
 
-type ProductFilterCardProps = {
+type MaterialFilterCardProps = {
   filter: string;
   onRemove?: (filter: string) => void;
 };
-export function ProductFilterCard({
+export function MaterialFilterCard({
   filter,
   onRemove,
-}: ProductFilterCardProps) {
+}: MaterialFilterCardProps) {
   const { filterValueList, setFilterValueList } = useFilter();
 
   const handleClick = () => {

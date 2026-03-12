@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import sortProducts from "../lib/sortProducts";
+import sortMaterials from "../lib/sortMaterials";
 import { Accordion, AccordionContent, AccordionTrigger } from "./ui/accordion";
 import { AccordionItem } from "@radix-ui/react-accordion";
 
@@ -19,7 +19,7 @@ const AlphabetizeRadio = ({ products, setProducts }) => {
 
   const handleSort = (direction: string) => {
     setSelectedOption(direction);
-    const sortedList = sortProducts(products, direction);
+    const sortedList = sortMaterials(products, direction);
     setProducts(sortedList);
   };
   return (
