@@ -1,3 +1,11 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// getMaterialBySlug
+// Fetches a single material's metadata from Supabase by its URL slug.
+// Primarily used for generating SEO metadata (Open Graph, structured data).
+// Returns an object with empty strings on error rather than throwing, to
+// prevent metadata generation from crashing the page build.
+// ─────────────────────────────────────────────────────────────────────────────
+
 import supabase from "@/lib/supabaseServer";
 
 export async function getMaterialBySlug(

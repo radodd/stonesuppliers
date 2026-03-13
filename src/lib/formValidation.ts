@@ -1,3 +1,9 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// Form Validation Rules
+// react-hook-form validation rule objects for each ContactForm field.
+// Import the specific rule you need by field name from this file.
+// ─────────────────────────────────────────────────────────────────────────────
+
 export const validationRules = {
   firstName: { required: "Please enter your first name" },
   lastName: {

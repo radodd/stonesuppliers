@@ -1,5 +1,18 @@
 "use client";
 
+// ─────────────────────────────────────────────────────────────────────────────
+// CartContext
+//
+// Manages global cart state and persists it to localStorage using LZ-String
+// compression. Compression is necessary because large cart objects can approach
+// localStorage's 5 MB limit when serialized as plain JSON.
+//
+// Persistence strategy:
+//   1. On mount: read + decompress any saved cart from localStorage.
+//   2. On every cartItems change (after mount): compress + write to localStorage.
+//      The isFirstLoad ref prevents overwriting the value we just read on step 1.
+// ─────────────────────────────────────────────────────────────────────────────
+
 import React, {
   createContext,
   useContext,
@@ -8,15 +21,16 @@ import React, {
   useEffect,
   useRef,
 } from "react";
-import LZString from "lz-string";
+import LZString from "lz-string"; // Compress cart data before storing in localStorage
 
 interface CartItem {
-  // id: string;
+  // id is omitted — items are identified by their array index in this implementation
   name: string;
   quantity: string;
   category?: string;
   size?: string;
 }
+
 interface CartContextProps {
   cartItems: CartItem[];
   cartItemCounter: number;
@@ -29,10 +43,14 @@ const CartContext = createContext<CartContextProps | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+  // Tracks whether the initial localStorage read has completed.
+  // Prevents the write effect from overwriting localStorage before the read effect runs.
   const isFirstLoad = useRef(true);
 
   const cartItemCounter = cartItems.length;
 
+  // ── Step 1: Hydrate cart from localStorage on mount ───────────────────────
   useEffect(() => {
     const savedCart = localStorage.getItem("cartItems");
     if (savedCart) {
@@ -46,15 +64,15 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           console.warn("Invalid cart data in localStorage");
         }
       } catch (error) {
-        console.error(
-          "Error decompressing cartItems form localStorage:",
-          error,
-        );
+        console.error("Error decompressing cartItems from localStorage:", error);
       }
     }
   }, []);
 
+  // ── Step 2: Persist cart to localStorage on every change (after mount) ───
   useEffect(() => {
+    // Skip the first run — the read effect above just populated cartItems,
+    // and we don't want to immediately overwrite the stored value.
     if (isFirstLoad.current) {
       isFirstLoad.current = false;
       return;
@@ -63,29 +81,26 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("cartItems", compressedData);
   }, [cartItems]);
 
+  /** Append a new item to the cart */
   const addToCart = (item: CartItem) => {
     setCartItems((prev) => [...prev, item]);
   };
 
+  /** Remove the cart item at the given index */
   const removeFromCart = (index: number) => {
     setCartItems((prev) => prev.filter((_, i) => i !== index));
   };
 
   return (
     <CartContext.Provider
-      value={{
-        cartItems,
-        cartItemCounter,
-        addToCart,
-        removeFromCart,
-        setCartItems,
-      }}
+      value={{ cartItems, cartItemCounter, addToCart, removeFromCart, setCartItems }}
     >
       {children}
     </CartContext.Provider>
   );
 };
 
+/** Hook to access cart state. Must be used inside CartProvider. */
 export const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {

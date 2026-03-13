@@ -1,5 +1,23 @@
 "use client";
 
+// ─────────────────────────────────────────────────────────────────────────────
+// FilterContext
+//
+// Manages the filter state for the materials catalog. Uses a dual-state pattern:
+//
+//   filterValueList     — the COMMITTED filter state. Changing this immediately
+//                         re-runs the filter algorithm and updates the visible
+//                         products. Persisted to localStorage so the user's
+//                         selection survives navigation.
+//
+//   tempFilterValueList — a STAGING area for pending checkbox selections inside
+//                         the mobile filter drawer. Changes here do NOT update
+//                         the grid until the user taps "Apply Filters", at which
+//                         point tempFilterValueList is copied to filterValueList.
+//                         This prevents the grid from re-filtering on every
+//                         individual checkbox tap on mobile.
+// ─────────────────────────────────────────────────────────────────────────────
+
 import React, {
   createContext,
   useContext,
@@ -19,9 +37,13 @@ interface FilterContextProps {
 const FilterContext = createContext<FilterContextProps | undefined>(undefined);
 
 export const FilterProvider = ({ children }: { children: ReactNode }) => {
+  // Committed filters — drive what the product grid shows
   const [filterValueList, setFilterValueList] = useState<string[]>([]);
+
+  // Pending filters — staging area for mobile "Apply Filters" flow
   const [tempFilterValueList, setTempFilterValueList] = useState<string[]>([]);
 
+  // ── Hydrate committed filters from localStorage on mount ──────────────────
   useEffect(() => {
     const savedFilterValueList = localStorage.getItem("filterValueList");
     if (savedFilterValueList) {
@@ -29,22 +51,23 @@ export const FilterProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
+  // ── Persist committed filters to localStorage whenever they change ─────────
   useEffect(() => {
-    // Update localStorage whenever filterValueList changes
     if (filterValueList.length > 0) {
       localStorage.setItem("filterValueList", JSON.stringify(filterValueList));
     } else {
-      localStorage.removeItem("filterValueList"); // Remove from localStorage when empty
+      // Clean up the key when no filters are active
+      localStorage.removeItem("filterValueList");
     }
   }, [filterValueList]);
 
+  /**
+   * Remove a single filter value from both the committed list and the
+   * staging list so they stay in sync when a chip is dismissed.
+   */
   const clearFilter = (filter: string) => {
-    setFilterValueList((prevFilters) =>
-      prevFilters.filter((f) => f !== filter),
-    );
-    setTempFilterValueList((prevFilters) =>
-      prevFilters.filter((f) => f !== filter),
-    );
+    setFilterValueList((prev) => prev.filter((f) => f !== filter));
+    setTempFilterValueList((prev) => prev.filter((f) => f !== filter));
   };
 
   return (
@@ -62,6 +85,7 @@ export const FilterProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+/** Hook to access filter state. Must be used inside FilterProvider. */
 export const useFilter = () => {
   const context = useContext(FilterContext);
   if (context === undefined) {

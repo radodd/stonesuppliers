@@ -1,5 +1,19 @@
 "use client";
 
+// ─────────────────────────────────────────────────────────────────────────────
+// CustomerFacingNav
+//
+// The site-wide navigation bar. Renders differently for desktop and mobile:
+//   Desktop: sticky top bar with logo, nav links injected as children, cart icon
+//   Mobile:  hamburger button → Sheet (drawer) with a 3-level nested menu:
+//              Level 1: top-level links (Materials / About / Services / Contact)
+//              Level 2: company selector (Stoneyard / MRC / SPM) inside a Sheet
+//              Level 3: material list for the selected company inside a Sheet
+//
+// CustomerFacingNavLink — a styled <Link> wrapper used for desktop nav items.
+// CustomerFacingNav     — the full nav shell; accepts desktop nav children as props.
+// ─────────────────────────────────────────────────────────────────────────────
+
 import { cn } from "../lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -210,7 +224,6 @@ export function CustomerFacingNav({ children }: { children: ReactNode }) {
     );
 
     if (material) {
-      console.log(material);
       const slug = toSlug(material.name);
       router.push(`/materials/${slug}`);
     } else {

@@ -1,3 +1,10 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// generate-material-slugs (One-time Migration Script)
+// Backfills the `slug` column in Supabase for any materials that don't have
+// one yet. Run with: npx ts-node src/app/scripts/generate-material-slugs.ts
+// Safe to re-run — only updates rows where slug IS NULL.
+// ─────────────────────────────────────────────────────────────────────────────
+
 import { createClient } from "@supabase/supabase-js";
 import slugify from "slugify";
 // import "dotenv/config";

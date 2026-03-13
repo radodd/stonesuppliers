@@ -1,3 +1,13 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// Form API Client
+// Sends contact form data to the /api/resend endpoint which delivers the email
+// via the Resend service. Renders EmailTemplate to HTML server-side before
+// sending so the email body is formatted correctly.
+//
+// NOTE: The "from" address on line ~15 should be moved to an environment
+// variable (RESEND_FROM_EMAIL) before going to production.
+// ─────────────────────────────────────────────────────────────────────────────
+
 import { FormValues } from "./formTypes";
 import EmailTemplate from "../components/EmailTemplate";
 import ReactDOMServer from "react-dom/server";

@@ -1,3 +1,22 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// MaterialDetailForm
+//
+// The "Request to Quote" form on the material detail page. Collects category,
+// size, and quantity, validates with Zod, and adds the item to the cart via
+// CartContext.
+//
+// Notable patterns:
+//   • Stoneyard products skip the category/size selects entirely — Stoneyard
+//     uses a flat product model without the categories array that MRC and SPM
+//     materials carry (see the product.company[0] !== "Stoneyard" guard).
+//
+//   • onSubmit sets success=true, which triggers a useEffect. The effect fires
+//     the toast notification and resets the form, then clears success back to
+//     false. This deferred reset pattern is needed because react-hook-form's
+//     reset() must run after the current render cycle completes — calling it
+//     synchronously inside onSubmit would race with the form's own state update.
+// ─────────────────────────────────────────────────────────────────────────────
+
 import { Button } from "../../ui/button";
 import {
   Select,
@@ -112,6 +131,8 @@ export default function MaterialDetailForm({ product }: FormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className={styles.form}>
+        {/* Stoneyard products do not use the category/size system —
+            show the selects only for MRC Rock & Sand and Santa Paula Materials */}
         {product.company[0] !== "Stoneyard" && (
           <>
             <CategorySelect
