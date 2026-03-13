@@ -1,4 +1,4 @@
-const sortMaterials = (products, direction = "asc") => {
+const sortMaterials = (products: { name: string }[], direction = "asc") => {
   return [...products].sort((a, b) => {
     const nameA = a.name.toLowerCase();
     const nameB = b.name.toLowerCase();

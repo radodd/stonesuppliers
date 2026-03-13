@@ -44,7 +44,7 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
     </AccordionTrigger>
     <AccordionContent className={styles.accordionContent}>
       <ul>
-        {allFilters.map((key) => (
+        {(allFilters ?? []).map((key) => (
           <FilterItem
             key={key}
             label={key}
@@ -81,7 +81,7 @@ const FilterItem: React.FC<FilterItemProps> = ({
 
 export const ProductFilters: React.FC<{
   filterValueList: string[];
-  setFilterValueList: React.Dispatch<React.SetStateAction<string[]>>;
+  setFilterValueList: (value: string[]) => void;
   clearFilter: (value: string) => void;
   companyCounts: Record<string, number>;
   categoryCounts: Record<string, number>;

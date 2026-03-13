@@ -15,7 +15,7 @@ type ProductCardProps = {
   slug: string;
   name: string;
   description: string;
-  imagePrimary: string;
+  imagePrimary: string | null;
   company: string[];
   color: string[];
   uses: string[];

@@ -4,7 +4,7 @@
 // how-to steps, and news articles displayed on the landing page.
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const LandingPageCarousel = [
+export const LandingPageCarouselData = [
   {
     header: "Hello!",
     subheader: "We are",
@@ -158,7 +158,7 @@ export const Articles = [
     alt: "Ceremonial check presentation to Santa Paula Materials (SPM) for a $1.1M state loan supporting new green recycling initiatives.",
     title: "SP Materials: State $1.1M loan to help create new...",
     content:
-      "The ceremonial check for the proposed expansion - considered in the category of "green" business practices - was presented Thursday to Santa Paula Materials'...",
+      'The ceremonial check for the proposed expansion - considered in the category of "green" business practices - was presented Thursday to Santa Paula Materials\'...',
     url: "https://santapaulatimes.com/news/archivestory.php/aid/26736/SP_Materials:_State_$1.1M_loan_to_help_create_new_recycling_business.html",
     button: "Read Article",
   },

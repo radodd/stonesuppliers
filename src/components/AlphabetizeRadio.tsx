@@ -14,7 +14,13 @@ import styles from "../components/scss/FilterDropDown.module.scss";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Label } from "./ui/label";
 
-const AlphabetizeRadio = ({ products, setProducts }) => {
+const AlphabetizeRadio = ({
+  products,
+  setProducts,
+}: {
+  products: { name: string }[];
+  setProducts: (list: { name: string }[]) => void;
+}) => {
   const [selectedOption, setSelectedOption] = useState("asc");
 
   const handleSort = (direction: string) => {

@@ -2,13 +2,13 @@
 
 import { useForm } from "react-hook-form";
 import { FormValues } from "./../../lib/formTypes";
-import { sendFormData } from "../../lib/formApiClient";
+import { sendEmail } from "@/app/actions/sendEmail";
 import { useToast } from "./../ui/use-toast";
 import { useScreenSize } from "./../../lib/useScreenSize";
 import { useState } from "react";
-import { useCart } from "../../context/CartContext";
+import { useCart, type CartItem } from "../../context/CartContext";
 
-export const useContactForm = ({ cartItems = [] }) => {
+export const useContactForm = ({ cartItems = [] }: { cartItems?: CartItem[] }) => {
   // const { cartItems } = useCart()
   const { toast } = useToast();
   const isScreenSmall = useScreenSize(430);
@@ -43,15 +43,22 @@ export const useContactForm = ({ cartItems = [] }) => {
     try {
       const payload = {
         ...formData,
-        cartItems: Array.isArray(cartItems) ? cartItems : [],
+        cartItems: Array.isArray(cartItems)
+          ? cartItems.map((item) => ({
+              name: item.name,
+              quantity: item.quantity,
+              category: item.category ?? "",
+              size: item.size ?? "",
+            }))
+          : [],
       };
-      const result = await sendFormData(payload);
+      const result = await sendEmail(payload);
 
       if (!result.success) {
         console.error("Error sending email:", result.error);
       } else {
         if (Array.isArray(cartItems)) {
-          cartItems.forEach((_, index) => removeFromCart(index));
+          cartItems.forEach((item) => removeFromCart(item.cartId));
         }
         if (isScreenSmall) {
           setOpenModal(true);

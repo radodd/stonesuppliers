@@ -1,4 +1,4 @@
-const ShoppingCartIcon = ({ color, size }) => (
+const ShoppingCartIcon = ({ color, size }: { color: string; size: number }) => (
   <svg
     width={size}
     height={size}

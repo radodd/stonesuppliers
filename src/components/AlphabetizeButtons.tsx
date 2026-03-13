@@ -8,8 +8,13 @@ const AlphabetizeButtons = ({
   setProducts,
   alphabetFilter,
   setAlphabetFilter,
+}: {
+  products: { name: string }[];
+  setProducts: (list: { name: string }[]) => void;
+  alphabetFilter: boolean;
+  setAlphabetFilter: (v: boolean) => void;
 }) => {
-  const handleSort = (direction) => {
+  const handleSort = (direction: string) => {
     const sortedList = sortMaterials(products, direction);
     setProducts(sortedList);
   };
@@ -33,7 +38,7 @@ const AlphabetizeButtons = ({
       {alphabetFilter && (
         <div className="z-50 absolute flex flex-col mt-2 w-[128px] border-2 border-primary rounded-[4px] ">
           <Button
-            variant="filter"
+            variant="ghost"
             size="filter"
             onClick={() => handleSort("asc")}
             className="border-none justify-start"
@@ -41,7 +46,7 @@ const AlphabetizeButtons = ({
             A - Z
           </Button>
           <Button
-            variant="filter"
+            variant="ghost"
             size="filter"
             onClick={() => handleSort("desc")}
             className="border-none justify-start pt-0"

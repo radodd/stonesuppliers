@@ -1,4 +1,4 @@
-const IncrementIcon = ({ color, size }) => {
+const IncrementIcon = ({ color, size }: { color: string; size: number }) => {
   return (
     <svg
       width={size}

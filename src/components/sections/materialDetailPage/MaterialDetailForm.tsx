@@ -36,7 +36,7 @@ import {
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ProductCardProps } from "../../../app/(customerFacing)/materials/[slug]/page";
+import type { ProductCardProps } from "./MaterialDetailPageClient";
 import ShoppingCartIcon from "../../icons/ShoppingCartIcon";
 import QuantityInput from "../../QuantityInput";
 import { useEffect, useState } from "react";
@@ -176,7 +176,7 @@ const CategorySelect = ({ product, form, onCategoryChange }: SelectProps) => {
           <Select
             onValueChange={(value) => {
               field.onChange(value);
-              onCategoryChange(value);
+              onCategoryChange?.(value);
             }}
             value={field.value}
           >

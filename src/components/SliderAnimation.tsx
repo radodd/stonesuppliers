@@ -104,7 +104,7 @@ const Slider = () => {
     "Santa Paula Materials",
   ];
   const [currentLine, setCurrentLine] = useState(0);
-  const sliderRef = useRef(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -115,7 +115,9 @@ const Slider = () => {
   }, [lines.length]);
 
   useEffect(() => {
-    sliderRef.current.style.transform = `translateY(-${currentLine * 1.0416}%)`;
+    if (sliderRef.current) {
+      sliderRef.current.style.transform = `translateY(-${currentLine * 1.0416}%)`;
+    }
   }, [currentLine]);
 
   return (

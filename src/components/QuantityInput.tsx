@@ -20,7 +20,6 @@ interface QuantityInputProps {
   initialQuantity?: string;
   variant:
     | "link"
-    | "filter"
     | "default"
     | "destructive"
     | "outline"

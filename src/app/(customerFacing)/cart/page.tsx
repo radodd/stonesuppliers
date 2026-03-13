@@ -118,7 +118,17 @@ const HowToUseSection = () => (
   </div>
 );
 
-const QuantityInput = ({ value, handleIncrease, handleDecrease, index }) => {
+const QuantityInput = ({
+  value,
+  handleIncrease,
+  handleDecrease,
+  cartId,
+}: {
+  value: number;
+  handleIncrease: (cartId: string) => void;
+  handleDecrease: (cartId: string) => void;
+  cartId: string;
+}) => {
   return (
     <div className={style.quantityContainer}>
       <span>Quantity (Per Ton)</span>
@@ -126,7 +136,7 @@ const QuantityInput = ({ value, handleIncrease, handleDecrease, index }) => {
         <Button
           variant="quantityCart"
           size="quantityCart"
-          onClick={() => handleDecrease(index)}
+          onClick={() => handleDecrease(cartId)}
           disabled={value === 1}
         >
           -
@@ -136,7 +146,7 @@ const QuantityInput = ({ value, handleIncrease, handleDecrease, index }) => {
         <Button
           variant="quantityCart"
           size="quantityCart"
-          onClick={() => handleIncrease(index)}
+          onClick={() => handleIncrease(cartId)}
         >
           +
         </Button>
@@ -149,37 +159,39 @@ const Cart = () => {
   const { cartItems, setCartItems } = useCart();
   const methods = useForm();
 
-  const updateQuantity = (index: number, newQuantity: number) => {
-    const updatedCart = [...cartItems];
-    updatedCart[index].quantity = newQuantity.toString();
-    setCartItems(updatedCart);
+  const updateQuantity = (cartId: string, newQuantity: number) => {
+    setCartItems((prev) =>
+      prev.map((item) =>
+        item.cartId === cartId
+          ? { ...item, quantity: newQuantity.toString() }
+          : item,
+      ),
+    );
   };
 
-  const handleIncrease = (index: number) => {
-    const currentQuantity = parseInt(cartItems[index].quantity, 10);
-    const newQuantity = currentQuantity + 1;
-    updateQuantity(index, newQuantity);
+  const handleIncrease = (cartId: string) => {
+    const item = cartItems.find((i) => i.cartId === cartId);
+    if (!item) return;
+    updateQuantity(cartId, parseInt(item.quantity, 10) + 1);
   };
 
-  const handleDecrease = (index: number) => {
-    const currentQuantity = parseInt(cartItems[index].quantity, 10);
-    if (currentQuantity > 1) {
-      const newQuantity = currentQuantity - 1;
-      updateQuantity(index, newQuantity);
-    }
+  const handleDecrease = (cartId: string) => {
+    const item = cartItems.find((i) => i.cartId === cartId);
+    if (!item) return;
+    const current = parseInt(item.quantity, 10);
+    if (current > 1) updateQuantity(cartId, current - 1);
   };
 
-  const handleDelete = (index: number) => {
-    const updatedCart = cartItems.filter((_, i) => i !== index);
-    setCartItems(updatedCart);
+  const handleDelete = (cartId: string) => {
+    setCartItems((prev) => prev.filter((item) => item.cartId !== cartId));
   };
 
   return (
     <FormProvider {...methods}>
       <div>
         {cartItems.length > 0 ? (
-          cartItems.map((item, index) => (
-            <div key={index} className={style.cartItemContainer}>
+          cartItems.map((item) => (
+            <div key={item.cartId} className={style.cartItemContainer}>
               {/* <div className={style.imageContainer}>
                 <Image
                   src={item?.image ? item.image : "/image_not_available.svg"}
@@ -213,8 +225,8 @@ const Cart = () => {
 
                 <div className="quantity-controls">
                   <QuantityInput
-                    index={index}
-                    value={item?.quantity || 1}
+                    cartId={item.cartId}
+                    value={parseInt(item?.quantity || "1", 10)}
                     handleIncrease={handleIncrease}
                     handleDecrease={handleDecrease}
                   />
@@ -223,7 +235,7 @@ const Cart = () => {
               <Button
                 variant="link"
                 className="w-fit p-0 mt-2 italic"
-                onClick={() => handleDelete(index)}
+                onClick={() => handleDelete(item.cartId)}
               >
                 Delete
               </Button>

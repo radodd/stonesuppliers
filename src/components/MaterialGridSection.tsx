@@ -30,9 +30,10 @@ import styles from "./scss/MaterialGridSection.module.scss";
 
 type MaterialGridSectionProps = {
   title: string;
+  initialProducts?: Material[];
 };
 
-export default function MaterialGridSection({ title }: MaterialGridSectionProps) {
+export default function MaterialGridSection({ title, initialProducts }: MaterialGridSectionProps) {
   const {
     filterValueList,
     setFilterValueList,
@@ -41,13 +42,15 @@ export default function MaterialGridSection({ title }: MaterialGridSectionProps)
     tempFilterValueList,
   } = useFilter();
 
-  const [products, setProducts] = useState<Material[]>([]);
+  const [products, setProducts] = useState<Material[]>(initialProducts ?? []);
   const [alphabetFilter, setAlphabetFilter] = useState(false);
   const [filterDropDown, setFilterDropdown] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!initialProducts);
 
-  // ── Fetch all materials once on mount ──────────────────────────────────────
+  // ── Fetch all materials once on mount (skipped when initialProducts is provided) ──
   useEffect(() => {
+    if (initialProducts) return;
+
     const fetchProducts = async () => {
       try {
         const response = await fetch("/api/materials", {
@@ -191,7 +194,7 @@ export default function MaterialGridSection({ title }: MaterialGridSectionProps)
             Sort & Filter
           </Button>
 
-          <AlphabetizeRadio products={products} setProducts={setProducts} />
+          <AlphabetizeRadio products={products} setProducts={(list) => setProducts(list as Material[])} />
           <FilterDropDown
             filterValueList={filterValueList}
             setFilterValueList={setFilterValueList}
@@ -261,7 +264,7 @@ export default function MaterialGridSection({ title }: MaterialGridSectionProps)
             </div>
             <AlphabetizeButtons
               products={products}
-              setProducts={setProducts}
+              setProducts={(list) => setProducts(list as Material[])}
               alphabetFilter={alphabetFilter}
               setAlphabetFilter={setAlphabetFilter}
             />

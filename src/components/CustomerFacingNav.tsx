@@ -15,6 +15,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { cn } from "../lib/utils";
+import { toSlug } from "../lib/slugify";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -92,7 +93,7 @@ const MobileNavMenu = ({
 };
 
 /** Materials Dropdown inside the Mobile Nav */
-const MaterialsDropdown = ({ handleMaterialDetail }) => {
+const MaterialsDropdown = ({ handleMaterialDetail }: { handleMaterialDetail: (item: string) => void }) => {
   return (
     <Sheet>
       <SheetTrigger
@@ -118,7 +119,7 @@ const MaterialsDropdown = ({ handleMaterialDetail }) => {
 };
 
 /** Artisanal Stone and other material sections */
-const MaterialSections = ({ handleMaterialDetail }) => (
+const MaterialSections = ({ handleMaterialDetail }: { handleMaterialDetail: (item: string) => void }) => (
   <>
     <MaterialSection
       title="Stoneyard"
@@ -209,14 +210,6 @@ export function CustomerFacingNav({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const { cartItems, cartItemCounter } = useCart();
   const router = useRouter();
-
-  const toSlug = (text: string) =>
-    text
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9\s-]/g, "") // remove non-alphanumeric
-      .replace(/\s+/g, "-") // replace spaces with -
-      .replace(/-+/g, "-"); // collapse multiple dashes
 
   const handleMaterialDetail = async (materialName: string) => {
     const material = MaterialID.find(

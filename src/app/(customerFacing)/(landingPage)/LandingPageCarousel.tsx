@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button, type ButtonProps } from "@/components/ui/button";
 import {
   Carousel,
   CarouselApi,
@@ -14,7 +14,7 @@ import Slider from "@/components/SliderAnimation";
 import Image from "next/image";
 
 import styles from "@/scss/LandingPageCarousel.module.scss";
-import { LandingPageCarousel } from "@/data";
+import { LandingPageCarouselData } from "@/data";
 import CarouselIndicator from "@/components/ui/CarouselIndicator";
 import { useFilter } from "../../../context/FilterContext";
 
@@ -72,7 +72,7 @@ export default function LandingPageCarousel() {
     <>
       <Carousel setApi={setApi} className={styles.carousel}>
         <CarouselContent className={styles.carouselContent}>
-          {LandingPageCarousel.map((slide, index) => {
+          {LandingPageCarouselData.map((slide, index) => {
             return (
               <CarouselItem
                 key={index}
@@ -113,28 +113,31 @@ export default function LandingPageCarousel() {
                       {slide.description}
                     </p>
                     <div className={styles.uniqueButtonContainer}>
-                      {slide.buttons.map((button, btnIndex) => (
-                        <Button
-                          key={btnIndex}
-                          variant={
-                            validVariants.includes(
-                              button.variant as (typeof validVariants)[number],
-                            )
-                              ? (button.variant as (typeof validVariants)[number])
-                              : "default"
-                          }
-                          size="default"
-                          navigateTo={button.navigateTo}
-                        >
-                          {button.text}
-                        </Button>
-                      ))}
+                      {slide.buttons.map((button, btnIndex) => {
+                        const btn = button as { variant?: string; text: string; navigateTo: string };
+                        return (
+                          <Button
+                            key={btnIndex}
+                            variant={
+                              validVariants.includes(
+                                btn.variant as (typeof validVariants)[number],
+                              )
+                                ? (btn.variant as (typeof validVariants)[number])
+                                : "default"
+                            }
+                            size="default"
+                            navigateTo={btn.navigateTo}
+                          >
+                            {btn.text}
+                          </Button>
+                        );
+                      })}
                     </div>
                   </div>
                 ) : (
                   <div className={styles.container}>
                     <div className={styles.textContainer}>
-                      <Image alt="" src={slide.logo} width={56} height={24} />
+                      <Image alt="" src={slide.logo ?? ""} width={56} height={24} />
                       <div className={styles.headerContainer}>
                         {/* <span>{slide.header}</span> */}
                         <span>{slide.subheader}</span>
@@ -142,7 +145,8 @@ export default function LandingPageCarousel() {
                       <p className={styles.description}>{slide.description}</p>
                       <div className={styles.buttonContainer}>
                         {slide.buttons.map((button, btnIndex) => {
-                          let variant = button.variant; // Default to the button's specified variant
+                          const btn = button as { variant?: ButtonProps["variant"]; text: string; navigateTo: string; filter?: string[] };
+                          let variant: ButtonProps["variant"] = btn.variant; // Default to the button's specified variant
                           if (isMounted) {
                             const isSmallScreen = windowWidth <= 900;
                             const isLargeScreen = windowWidth > 900;
@@ -167,11 +171,11 @@ export default function LandingPageCarousel() {
                               key={btnIndex}
                               variant={variant}
                               size="default"
-                              navigateTo={button.navigateTo}
-                              filter={button.filter}
-                              onClick={() => setFilterValueList(button.filter)}
+                              navigateTo={btn.navigateTo}
+                              filter={btn.filter ? "active" : undefined}
+                              onClick={() => setFilterValueList(btn.filter ?? [])}
                             >
-                              {button.text}
+                              {btn.text}
                             </Button>
                           );
                         })}

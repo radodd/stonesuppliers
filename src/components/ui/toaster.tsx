@@ -25,7 +25,7 @@ export function Toaster() {
               <div className={styles.imageContainer}>
                 <Image
                   alt=""
-                  src={src}
+                  src={src ?? ""}
                   width={48}
                   height={48}
                   className={styles.image}

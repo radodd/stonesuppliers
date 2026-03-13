@@ -14,6 +14,7 @@ import {
 } from "@/data";
 import { useFilter } from "../../context/FilterContext";
 import { cn } from "../../lib/utils";
+import { toSlug } from "../../lib/slugify";
 import { CustomerFacingNavLink } from "../../components/CustomerFacingNav";
 import { Footer } from "../../components/Footer";
 import {
@@ -79,14 +80,6 @@ export default function Layout({
       localStorage.setItem("filterValueList", JSON.stringify([filterValue]));
     }
   };
-
-  const toSlug = (text: string) =>
-    text
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9\s-]/g, "") // remove non-alphanumeric
-      .replace(/\s+/g, "-") // replace spaces with -
-      .replace(/-+/g, "-"); // collapse multiple dashes
 
   const handleMaterialDetail = async (materialName: string) => {
     const material = MaterialID.find(
@@ -160,6 +153,15 @@ const MaterialMenuContent = ({
   setIsSubSubmenuOpen,
   handleFilterClick,
   handleMaterialDetail,
+}: {
+  onMouseLeave: () => void;
+  menuHeight: string;
+  isSubmenuOpen: number | null;
+  isSubSubmenuOpen: number | null;
+  setIsSubmenuOpen: (value: number | null) => void;
+  setIsSubSubmenuOpen: React.Dispatch<React.SetStateAction<number | null>>;
+  handleFilterClick: (filter: string) => void;
+  handleMaterialDetail: (item: string) => void;
 }) => (
   <NavigationMenuContent
     onMouseLeave={onMouseLeave}
@@ -235,7 +237,7 @@ interface MenuItemProps {
   subDescription: string;
   onMouseEnter: () => void;
   onMouseLeave?: () => void;
-  onClick: (event) => void;
+  onClick: (event?: React.MouseEvent) => void;
   isSubmenuOpen: boolean;
   submenuItems?: string[];
   isSubSubmenuOpen?: boolean;
@@ -287,7 +289,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
             key={index}
             className={`${title === "Stoneyard" ? "w-[242px]" : ""} text-xl hover:text-primary cursor-pointer w-[182px]`}
             onClick={() => {
-              handleMaterialDetail(item);
+              handleMaterialDetail?.(item);
             }}
           >
             {item}

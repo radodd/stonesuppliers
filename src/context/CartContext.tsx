@@ -23,8 +23,8 @@ import React, {
 } from "react";
 import LZString from "lz-string"; // Compress cart data before storing in localStorage
 
-interface CartItem {
-  // id is omitted — items are identified by their array index in this implementation
+export interface CartItem {
+  cartId: string;
   name: string;
   quantity: string;
   category?: string;
@@ -34,8 +34,8 @@ interface CartItem {
 interface CartContextProps {
   cartItems: CartItem[];
   cartItemCounter: number;
-  addToCart: (item: CartItem) => void;
-  removeFromCart: (index: number) => void;
+  addToCart: (item: Omit<CartItem, "cartId">) => void;
+  removeFromCart: (cartId: string) => void;
   setCartItems: React.Dispatch<React.SetStateAction<CartItem[]>>;
 }
 
@@ -59,7 +59,14 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           LZString.decompressFromUTF16(savedCart) || "[]",
         );
         if (Array.isArray(decompressedCart)) {
-          setCartItems(decompressedCart);
+          // Migration: backfill cartId for items saved before stable IDs were introduced
+          const migrated: CartItem[] = decompressedCart.map(
+            (item: any, i: number) => ({
+              ...item,
+              cartId: item.cartId ?? `legacy:${i}:${Date.now()}`,
+            }),
+          );
+          setCartItems(migrated);
         } else {
           console.warn("Invalid cart data in localStorage");
         }
@@ -81,14 +88,15 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("cartItems", compressedData);
   }, [cartItems]);
 
-  /** Append a new item to the cart */
-  const addToCart = (item: CartItem) => {
-    setCartItems((prev) => [...prev, item]);
+  /** Append a new item to the cart, generating a stable cartId */
+  const addToCart = (item: Omit<CartItem, "cartId">) => {
+    const cartId = [item.name, item.category ?? "", item.size ?? "", Date.now()].join(":");
+    setCartItems((prev) => [...prev, { ...item, cartId }]);
   };
 
-  /** Remove the cart item at the given index */
-  const removeFromCart = (index: number) => {
-    setCartItems((prev) => prev.filter((_, i) => i !== index));
+  /** Remove the cart item with the given stable cartId */
+  const removeFromCart = (cartId: string) => {
+    setCartItems((prev) => prev.filter((item) => item.cartId !== cartId));
   };
 
   return (

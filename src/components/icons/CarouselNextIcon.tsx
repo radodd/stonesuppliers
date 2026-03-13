@@ -1,6 +1,6 @@
 import React from "react";
 
-const CarouselNextIcon = ({ width, height, color }) => {
+const CarouselNextIcon = ({ width = 20, height = 30, color = "currentColor" }: { width?: number; height?: number; color?: string }) => {
   return (
     <svg
       width={width}
