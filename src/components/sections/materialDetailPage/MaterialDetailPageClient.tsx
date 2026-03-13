@@ -231,19 +231,3 @@ export default function MaterialDetailPageClient({
   );
 }
 
-/** Map a MaterialDetailDTO (from the service) to the ProductCardProps shape. */
-export function toProductCardProps(dto: MaterialDetailDTO): ProductCardProps {
-  return {
-    id: String(dto.id),
-    slug: dto.slug,
-    name: dto.name,
-    description: dto.description,
-    imagePrimary: dto.imagePrimary,
-    imagePath: dto.images,
-    company: dto.company,
-    color: dto.color,
-    uses: dto.uses,
-    categories: dto.categories,
-    texture: dto.texture,
-  };
-}

@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { gaEvent } from "@/lib/ga";
 import {
   Card,
   CardContent,
@@ -39,7 +42,26 @@ export function ProductCard({
         decorative={true}
         className={styles.separator}
       />
-      <Link href={`/materials/${slug}`} key={id} prefetch={false}>
+      <Link
+        href={`/materials/${slug}`}
+        key={id}
+        prefetch={false}
+        onClick={() =>
+          gaEvent("select_item", {
+            item_list_name: "materials_catalog",
+            items: [
+              {
+                item_id: id,
+                item_name: name,
+                item_category: Array.isArray(category)
+                  ? category.join(", ")
+                  : category,
+                item_brand: company.join(", "),
+              },
+            ],
+          })
+        }
+      >
         <Card className={styles.card}>
           <div className={styles.imageWrapper}>
             <Image

@@ -17,6 +17,7 @@
 //     synchronously inside onSubmit would race with the form's own state update.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { gaEvent } from "@/lib/ga";
 import { Button } from "../../ui/button";
 import {
   Select,
@@ -93,6 +94,16 @@ export default function MaterialDetailForm({ product }: FormProps) {
       quantity: values.quantity,
     };
     addToCart(formDataJSON);
+    gaEvent("add_to_cart", {
+      items: [
+        {
+          item_name: values.name,
+          item_category: values.category || undefined,
+          item_variant: values.size || undefined,
+          quantity: parseInt(values.quantity, 10),
+        },
+      ],
+    });
     setSuccess(true);
   };
 

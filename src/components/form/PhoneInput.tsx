@@ -1,31 +1,35 @@
-import React, { PropsWithRef, forwardRef, useRef } from "react";
-// import ReactInputMask from "react-input-mask-next";
-import ReactInputMask from "react-input-mask";
+import React, { forwardRef } from "react";
 import { PhoneInputProps } from "../../lib/formTypes";
-
 import style from "./ContactForm.module.scss";
 
-const NonStrictWrapper = ({ children }: { children: React.ReactNode }) => (
-  <React.Fragment>{children}</React.Fragment>
-);
+function formatPhone(value: string): string {
+  const digits = value.replace(/\D/g, "").slice(0, 10);
+  if (digits.length <= 3) return digits.length ? `(${digits}` : "";
+  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+}
 
 const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
-  ({ label, placeholder, error, register, ...rest }, ref) => (
-    <div className={style.inputContainer}>
-      <NonStrictWrapper>
-        <ReactInputMask
-          {...register}
+  ({ label, error, register, ...rest }, _ref) => {
+    const { onChange, ref, ...registerRest } = register;
+    return (
+      <div className={style.inputContainer}>
+        <input
+          {...registerRest}
           {...rest}
+          ref={ref}
           placeholder="Phone Number"
-          mask="(999) 999-9999"
-          inputref={ref}
           className={style.inputField}
+          onChange={(e) => {
+            e.target.value = formatPhone(e.target.value);
+            onChange(e);
+          }}
         />
-      </NonStrictWrapper>
-      <label className={style.label}>{label}</label>
-      {error && <p className={style.errorMessage}>{error}</p>}
-    </div>
-  ),
+        <label className={style.label}>{label}</label>
+        {error && <p className={style.errorMessage}>{error}</p>}
+      </div>
+    );
+  },
 );
 
 PhoneInput.displayName = "PhoneInput";

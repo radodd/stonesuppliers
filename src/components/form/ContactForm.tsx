@@ -29,6 +29,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
     watch,
     trigger,
     setValue,
+    handleFormStart,
   } = useContactForm({ cartItems });
 
   useEffect(() => {
@@ -45,7 +46,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
   return (
     <div className={style.formContainer}>
-      <form onSubmit={handleSubmit(onSubmit)} className={style.formBody}>
+      <form onSubmit={handleSubmit(onSubmit)} onFocus={handleFormStart} className={style.formBody}>
         <div className={style.nameContainer}>
           <TextInput
             label="First Name"
