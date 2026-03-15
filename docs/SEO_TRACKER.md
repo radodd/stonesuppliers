@@ -9,11 +9,12 @@ Update this file as items are completed or new work is identified.
 
 1. [GSC Performance Summary](#gsc-performance-summary)
 2. [Completed SEO Updates](#completed-seo-updates)
-3. [Pending — Code Changes](#pending--code-changes)
-4. [Pending — Client Action Required](#pending--client-action-required)
-5. [mrcrs.com Migration Plan](#mrcrscm-migration-plan)
-6. [GBP Consolidation Plan](#gbp-consolidation-plan)
-7. [Ongoing Monitoring](#ongoing-monitoring)
+3. [Site Audit Tooling](#site-audit-tooling)
+4. [Pending — Code Changes](#pending--code-changes)
+5. [Pending — Client Action Required](#pending--client-action-required)
+6. [mrcrs.com Migration Plan](#mrcrscm-migration-plan)
+7. [GBP Consolidation Plan](#gbp-consolidation-plan)
+8. [Ongoing Monitoring](#ongoing-monitoring)
 
 ---
 
@@ -87,8 +88,62 @@ Update this file as items are completed or new work is identified.
 
 ---
 
+## Site Audit Tooling
+
+An automated headless browser audit script was added to catch regressions after deploys. It uses Playwright (Chromium) and crawls every URL from `/sitemap.xml`.
+
+### Script location
+`scripts/audit.ts`
+
+### What it checks per page
+1. **HTTP status** — flags any 4xx/5xx response
+2. **Broken images** — detects `<img>` elements that failed to load (`naturalWidth === 0`)
+3. **JS console errors** — collects `console.error` and unhandled exceptions on page load
+4. **Interaction errors** — clicks every visible button at both desktop (1280px) and mobile (375px) viewports, collects any errors triggered by those clicks (e.g. React void-element errors from Sheets/Dialogs, form validation bugs)
+
+### How to run
+
+```bash
+# Audit live site (production)
+npm run audit
+
+# Audit local dev server — required for full React error detail
+npm run dev            # terminal 1
+npm run audit:local    # terminal 2
+```
+
+> **Important:** `npm run audit:local` against `npm run dev` is what surfaces React component-level errors (like the `link is a void element` bug). React production build suppresses verbose dev-only errors — always use local dev for a thorough check after making component changes.
+
+### ⚠️ Sitemap deployment dependency
+
+The audit script uses the live `/sitemap.xml` as its source of URLs. The staging branch contains sitemap code changes that have **not yet been deployed to production**:
+
+- The current live sitemap incorrectly includes `/cart` (should be excluded)
+- Once deployed, the sitemap will also include all material slugs from Supabase (beyond just `/materials/mojave`)
+
+**Do not rely on `npm run audit` as a complete check until the staging branch is deployed.** Use `npm run audit:local` in the meantime — the local dev server serves the correct updated sitemap.
+
+### Last audit run — 2026-03-15 (live site, staging not yet deployed)
+
+| Page | Status | Issues |
+|------|--------|--------|
+| / | FAIL | Interaction error: `Error fetching DATA` + `403` when nav buttons trigger materials fetch. Likely Cloudflare bot protection blocking headless browser API calls. |
+| /about | PASS | — |
+| /services | PASS | — |
+| /contact | PASS | — |
+| /cart | PASS | — (should not be in sitemap — excluded once staging deployed) |
+| /materials | PASS | — |
+| /materials/mojave | PASS | — |
+
+**Homepage 403 / fetch error:** Triggered when clicking landing page buttons that navigate to `/materials` with filter state. The client-side Supabase fetch is being blocked with 403 in headless context — investigate whether Cloudflare rate limiting is also affecting real users on slower connections.
+
+**Known unfixed bug (found manually, not yet caught by audit):** `link is a void element tag and must neither have children nor use dangerouslySetInnerHTML` — fired after clicking a button (likely in the mobile nav Sheet). Run `npm run audit:local` against dev server to pinpoint the component.
+
+---
+
 ## Pending — Code Changes
 
+- [ ] **Deploy staging branch to production** — sitemap changes, metadata overhaul, Sentry, GA4/GTM, and audit script are all on staging. Once deployed: resubmit sitemap in GSC, validate schema with Rich Results Test, and re-run `npm run audit` to confirm clean pass.
 - [ ] **Add `sameAs` to LocalBusiness + Organization schemas** — blocked on client providing GBP and Yelp URLs (see TODO comments in `src/app/layout.tsx:96`)
 - [ ] **Add `LocalBusiness` schema to `/services` page** — the highest-traffic page has no page-level schema. Should include `ServiceArea` and list of services offered.
 - [ ] **Add `Product` schema to each `/materials/[slug]` page** — structured data for each material (name, description, image, brand). Could enable rich results in Google Shopping / product carousels.
