@@ -39,5 +39,28 @@ export default async function ProductPage({
 
   if (!dto) notFound();
 
-  return <MaterialDetailPageClient product={toProductCardProps(dto)} />;
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: dto.name,
+    description: dto.description,
+    ...(dto.imagePrimary && { image: dto.imagePrimary }),
+    brand: { "@type": "Brand", name: "MRC Rock & Sand" },
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      seller: { "@type": "Organization", name: "MRC Rock & Sand" },
+      areaServed: { "@type": "State", name: "California" },
+    },
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
+      <MaterialDetailPageClient product={toProductCardProps(dto)} />
+    </>
+  );
 }

@@ -8,6 +8,30 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.stonesuppliers.net/about",
   },
+  openGraph: {
+    title: "About Us | MRC Rock & Sand & SPM Santa Paula Materials",
+    description:
+      "Learn about MRC Rock & Sand and SPM Santa Paula Materials—Southern California’s trusted providers of premium stone, aggregates, and recycled materials.",
+    url: "https://www.stonesuppliers.net/about",
+    siteName: "MRC Rock & Sand",
+    images: [
+      {
+        url: "https://www.stonesuppliers.net/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "MRC Rock & Sand — About Us",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us | MRC Rock & Sand & SPM Santa Paula Materials",
+    description:
+      "Southern California’s trusted providers of premium stone, aggregates, and recycled materials.",
+    images: ["https://www.stonesuppliers.net/og-image.jpg"],
+  },
 };
 
 export default function Layout({

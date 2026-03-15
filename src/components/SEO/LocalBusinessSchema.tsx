@@ -3,7 +3,7 @@ const localBusinessSchema = {
   "@type": "LocalBusiness",
   name: "MRC Rock & Sand | SPM Santa Paula Materials | Stoneyard",
   image: "https://www.stonesuppliers.net/image_carousel_spm.png",
-  "@id": "",
+  "@id": "https://www.stonesuppliers.net/#localbusiness",
   url: "https://www.stonesuppliers.net/",
   telephone: "(805) 525-6858",
   address: {

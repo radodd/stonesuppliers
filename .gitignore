@@ -49,3 +49,6 @@ next-env.d.ts
 api/dist
 # Sentry Config File
 .env.sentry-build-plugin
+
+# Client credentials — local only, never commit
+docs/CLIENT_INFO.md

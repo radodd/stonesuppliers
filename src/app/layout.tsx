@@ -26,11 +26,35 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "MRC Rock & Sand",
+  title: "MRC Rock & Sand | Gravel, Sand & Aggregates — Santa Paula, CA",
   description:
-    "Premium stone, aggregates, and recycled materials from MRC Rock & Sand and SPM Santa Paula Materials. Serving all construction and landscaping needs.",
+    "MRC Rock & Sand and SPM Santa Paula Materials supply bulk gravel, decomposed granite, pea gravel, sand, and recycled aggregates in Santa Paula and throughout Southern California.",
   alternates: {
     canonical: "https://www.stonesuppliers.net",
+  },
+  openGraph: {
+    title: "MRC Rock & Sand | Gravel, Sand & Aggregates — Santa Paula, CA",
+    description:
+      "Bulk gravel, decomposed granite, pea gravel, sand, and recycled aggregates. MRC Rock & Sand and SPM Santa Paula Materials — serving Southern California.",
+    url: "https://www.stonesuppliers.net",
+    siteName: "MRC Rock & Sand",
+    images: [
+      {
+        url: "https://www.stonesuppliers.net/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "MRC Rock & Sand — Gravel, Sand & Aggregates",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MRC Rock & Sand | Gravel, Sand & Aggregates — Santa Paula, CA",
+    description:
+      "Bulk gravel, decomposed granite, pea gravel, and aggregates from MRC Rock & Sand and SPM Santa Paula Materials.",
+    images: ["https://www.stonesuppliers.net/og-image.jpg"],
   },
 };
 
@@ -52,8 +76,11 @@ export default function RootLayout({
     "@type": "Organization",
     name: "MRC Rock & Sand",
     alternateName: "SPM Santa Paula Materials",
+    "@id": "https://www.stonesuppliers.net/#organization",
     url: "https://www.stonesuppliers.net",
     logo: "https://www.stonesuppliers.net/logo_rocks.png",
+    // TODO: add sameAs once client provides Google Business Profile and Yelp URLs
+    // sameAs: ["GOOGLE_BUSINESS_PROFILE_URL", "YELP_URL"],
   };
 
   const localBusinessSchema = {
@@ -61,25 +88,39 @@ export default function RootLayout({
     "@type": "LocalBusiness",
     name: "MRC Rock & Sand",
     alternateName: "SPM Santa Paula Materials",
-    image: "https://www.stonesuppliers.net/image_carousel_spm.png",
-    "@id": "",
+    "@id": "https://www.stonesuppliers.net/#localbusiness",
     url: "https://www.stonesuppliers.net/",
     telephone: "(805) 525-6858",
+    image: "https://www.stonesuppliers.net/image_carousel_spm.png",
+    logo: "https://www.stonesuppliers.net/logo_rocks.png",
+    priceRange: "$$",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "1224 E Santa Clara St",
+      streetAddress: "1224 Santa Clara St",
       addressLocality: "Santa Paula",
       addressRegion: "CA",
       postalCode: "93060",
       addressCountry: "US",
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 34.3542,
+      longitude: -119.0593,
+    },
+    areaServed: [
+      { "@type": "City", "name": "Santa Paula" },
+      { "@type": "City", "name": "Ventura" },
+      { "@type": "City", "name": "Oxnard" },
+      { "@type": "State", "name": "California" },
+    ],
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
       opens: "09:00",
       closes: "17:00",
     },
-    logo: "https://www.stonesuppliers.net/logo_rocks.png",
+    // TODO: add sameAs once client provides Google Business Profile and Yelp URLs
+    // sameAs: ["GOOGLE_BUSINESS_PROFILE_URL", "YELP_URL"],
   };
 
   return (
