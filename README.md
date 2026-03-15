@@ -1,3 +1,18 @@
+# Stone Suppliers
+
+## Documentation
+
+| Doc | Description |
+|---|---|
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | System overview, core flows, and subsystem architecture |
+| [docs/SENTRY.md](docs/SENTRY.md) | Error monitoring setup, config files, env vars, and production checklist |
+| [docs/OBSERVABILITY.md](docs/OBSERVABILITY.md) | Observability stack — Sentry + rate limit test endpoints |
+| [docs/ANALYTICS_INTEGRATION.md](docs/ANALYTICS_INTEGRATION.md) | GA4 + GTM + Microsoft Clarity integration reference |
+| [docs/RATE_LIMITING.md](docs/RATE_LIMITING.md) | Distributed rate limiting with Upstash Redis |
+| [docs/REFACTORING.md](docs/REFACTORING.md) | Monorepo → single Next.js app refactor history |
+
+---
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
