@@ -95,8 +95,6 @@ export default function Layout({
   return (
     <>
       <script
-        async
-        src=" "
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />

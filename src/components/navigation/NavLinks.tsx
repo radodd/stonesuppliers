@@ -14,12 +14,13 @@ export function DeskTopNavLink(
   props: Omit<ComponentProps<typeof Link>, "className">,
 ) {
   const pathname = usePathname();
+  const isActive = pathname === props.href;
   return (
     <Link
       {...props}
       className={cn(
-        "font-openSans text-[24px] m-0 px-1 w-fit rounded-lg text-[#2C2D31] bg-whitebase hover:font-bold",
-        pathname === "/cart" && "font-bold",
+        "font-openSans text-[24px] m-0 px-1 w-fit rounded-lg text-[#2C2D31] bg-whitebase hover:text-primary",
+        isActive && "text-primary",
       )}
     />
   );

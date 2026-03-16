@@ -56,7 +56,7 @@ export default function NavigationMenuComponent() {
 
   const Logo = () => (
     <Link href="/">
-      <Image src="/logo_rocks.svg" alt="Company Logo" height={64} width={207} />
+      <Image src="/logo_rocks.svg" alt="Company Logo" height={64} width={207} style={{ width: "100%", height: "auto" }} />
     </Link>
   );
 

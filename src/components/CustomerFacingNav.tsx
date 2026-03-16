@@ -45,7 +45,7 @@ import { useCart } from "../context/CartContext";
 /** A reusable component for the site logo */
 const Logo = () => (
   <Link href="/">
-    <Image src="/logo_rocks.svg" alt="Company Logo" height={64} width={207} />
+    <Image src="/logo_rocks.svg" alt="Company Logo" height={64} width={207} style={{ width: "100%", height: "auto" }} />
   </Link>
 );
 
@@ -93,7 +93,11 @@ const MobileNavMenu = ({
 };
 
 /** Materials Dropdown inside the Mobile Nav */
-const MaterialsDropdown = ({ handleMaterialDetail }: { handleMaterialDetail: (item: string) => void }) => {
+const MaterialsDropdown = ({
+  handleMaterialDetail,
+}: {
+  handleMaterialDetail: (item: string) => void;
+}) => {
   return (
     <Sheet>
       <SheetTrigger
@@ -119,7 +123,11 @@ const MaterialsDropdown = ({ handleMaterialDetail }: { handleMaterialDetail: (it
 };
 
 /** Artisanal Stone and other material sections */
-const MaterialSections = ({ handleMaterialDetail }: { handleMaterialDetail: (item: string) => void }) => (
+const MaterialSections = ({
+  handleMaterialDetail,
+}: {
+  handleMaterialDetail: (item: string) => void;
+}) => (
   <>
     <MaterialSection
       title="Stoneyard"
@@ -173,7 +181,7 @@ const MaterialSection = ({
       {items && (
         <>
           <div className={styles.subtitleContainer}>
-            <Image src={src} alt="" width={50} height={50} />
+            <Image src={src} alt="" width={50} height={50} style={{ width: "auto", height: "auto" }} />
             <span>{description}</span>
           </div>
           <ul>
@@ -264,12 +272,13 @@ export function CustomerFacingNavLink(
   props: Omit<ComponentProps<typeof Link>, "className">,
 ) {
   const pathname = usePathname();
+  const isActive = pathname === props.href;
   return (
     <Link
       {...props}
       className={cn(
-        "font-openSans m-0 px-1 w-fit rounded-lg bg-whitebase hover:font-bold",
-        pathname === "/cart" && "font-bold",
+        "font-openSans m-0 px-1 w-fit rounded-lg bg-whitebase hover:text-primary",
+        isActive && "text-primary",
       )}
     />
   );

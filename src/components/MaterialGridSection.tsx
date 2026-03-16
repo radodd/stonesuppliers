@@ -159,7 +159,7 @@ export default function MaterialGridSection({ title, initialProducts }: Material
       <div className="flex justify-center min-[1306px]:hidden">
         {loading ? (
           <div className={styles.loadingContainer}>
-            <Image src="/loading.svg" alt="Loading..." width={800} height={400} />
+            <Image src="/loading.svg" alt="Loading..." width={800} height={400} priority style={{ width: "auto", height: "auto" }} />
           </div>
         ) : (
           <>
@@ -234,7 +234,7 @@ export default function MaterialGridSection({ title, initialProducts }: Material
               onClick={clearAllFilters}
             >
               Clear All Filters
-              <Image src="/close.svg" alt="" width={12} height={12} className={styles.image} />
+              <Image src="/close.svg" alt="" width={12} height={12} style={{ width: "12px", height: "12px" }} />
             </Button>
           )}
           <ProductFilters
@@ -273,7 +273,7 @@ export default function MaterialGridSection({ title, initialProducts }: Material
           <div className="min-[1306px]:mx-[0px]">
             {loading ? (
               <div className={styles.loadingContainer}>
-                <Image src="/loading.svg" alt="Loading..." width={800} height={400} />
+                <Image src="/loading.svg" alt="Loading..." width={800} height={400} priority style={{ width: "auto", height: "auto" }} />
               </div>
             ) : (
               <>

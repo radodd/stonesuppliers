@@ -41,6 +41,7 @@ const AccordionTrigger = React.forwardRef<
         width={16}
         height={8}
         className="shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180"
+        style={{ width: "16px", height: "8px" }}
       />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>

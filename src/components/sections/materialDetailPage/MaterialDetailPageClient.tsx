@@ -39,7 +39,9 @@ export default function MaterialDetailPageClient({
 }: {
   product: ProductCardProps;
 }) {
-  const [selectedImage, setSelectedImage] = useState("");
+  const [selectedImage, setSelectedImage] = useState(
+    product.imagePath?.length > 0 ? product.imagePath[0] : "/image_not_available.svg"
+  );
   const [orientation, setOrientation] = useState<Orientation>("horizontal");
   const [expanded, setExpanded] = useState(false);
 
@@ -71,14 +73,6 @@ export default function MaterialDetailPageClient({
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  useEffect(() => {
-    if (product.imagePath?.length > 0) {
-      setSelectedImage(product.imagePath[0]);
-    } else {
-      setSelectedImage("/image_not_available.svg");
-    }
-  }, [product]);
 
   const numImages = product.imagePath ? product.imagePath.length : 0;
   const totalGapWidthPercentage = ((4 * 5) / 480) * 50;

@@ -23,12 +23,13 @@ const securityHeaders = [
     value: [
       "default-src 'self'",
       // Next.js requires unsafe-inline for its runtime scripts
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://scripts.clarity.ms",
       "style-src 'self' 'unsafe-inline'",
       // next/font serves fonts from the same origin — no external font CDN needed
       "font-src 'self'",
       "img-src 'self' data: blob: https://dzlauufqbyfqfivbiipg.supabase.co",
       "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://dzlauufqbyfqfivbiipg.supabase.co https://www.clarity.ms https://*.clarity.ms",
+      "worker-src blob:",
       "frame-src https://www.googletagmanager.com",
       "object-src 'none'",
       "base-uri 'self'",
