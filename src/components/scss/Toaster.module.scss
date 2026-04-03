@@ -1,0 +1,86 @@
+@use "../../../css/queries.scss";
+@import "../../../css/queries.scss";
+
+.Toast {
+  @include small-break {
+    width: 300px;
+    height: 300px;
+    padding: 20px 20px;
+  }
+}
+
+.toastContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: descriptionpx;
+  @include mid-break {
+    gap: 40px;
+  }
+  @include large-break {
+    gap: 40px;
+  }
+}
+
+.imageContainer {
+  background-color: hsl(var(--primary));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  width: 50px;
+  height: 50px;
+  @include mid-break {
+    width: 88px;
+    height: 88px;
+  }
+  @include large-break {
+    width: 88px;
+    height: 88px;
+  }
+}
+
+.image {
+  width: 30px;
+  height: 30px;
+  @include mid-break {
+    width: 48px;
+    height: 48px;
+  }
+  @include large-break {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+.title {
+  font-size: 24px;
+  @include mid-break {
+    font-size: 36px;
+  }
+  @include large-break {
+    font-size: 36px;
+  }
+}
+
+.description {
+  font-size: 16px;
+  @include mid-break {
+    font-size: 20px;
+  }
+  @include large-break {
+    font-size: 20px;
+  }
+}
+
+.viewport {
+  min-width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Fixed to the viewport, centered */
+  top: 0;
+  left: 0;
+}
