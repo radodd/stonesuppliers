@@ -53,7 +53,7 @@ export default function MaterialDetailPageClient({
           item_id: product.id,
           item_name: product.name,
           item_category: product.categories?.map((cat) => cat.name).join(", "),
-          item_company: product.company.join(", "),
+          item_brand: product.company.join(", "),
         },
       ],
     });
@@ -189,9 +189,15 @@ export default function MaterialDetailPageClient({
 
           <div className="flex gap-6">
             <Button
-              onClick={() =>
-                window.open("/Category_Sizes_Reference.pdf", "_blank")
-              }
+              onClick={() => {
+                gaEvent("file_download", {
+                  file_name: "Category_Sizes_Reference.pdf",
+                  file_extension: "pdf",
+                  link_text: "Category Sizes",
+                  link_url: "/Category_Sizes_Reference.pdf",
+                });
+                window.open("/Category_Sizes_Reference.pdf", "_blank");
+              }}
             >
               Category Sizes
             </Button>

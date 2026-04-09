@@ -17,6 +17,7 @@ import { Button } from "./ui/button";
 
 import styles from "../components/scss/FilterDropDown.module.scss";
 import { useFilter } from "../context/FilterContext";
+import { gaEvent } from "@/lib/ga";
 
 type FilterGroupProps = {
   title: string;
@@ -119,6 +120,22 @@ const FilterDropDown: React.FC<{
     });
   };
   const applyFilters = () => {
+    if (tempFilterValueList.length > 0) {
+      const getFilterType = (value: string): string => {
+        if (AllCompanies.includes(value)) return "company";
+        if (AllCategories.includes(value)) return "category";
+        if (AllTextures.includes(value)) return "texture";
+        if (AllColors.includes(value)) return "color";
+        if (AllSizes.includes(value)) return "size";
+        return "unknown";
+      };
+      const filterTypes = [...new Set(tempFilterValueList.map(getFilterType))];
+      gaEvent("filter_applied", {
+        filter_values: tempFilterValueList.join(", "),
+        filter_count: tempFilterValueList.length,
+        filter_types: filterTypes.join(", "),
+      });
+    }
     setFilterValueList(tempFilterValueList);
   };
   const filterCountsArray = [
