@@ -97,7 +97,9 @@ export default function MaterialDetailForm({ product }: FormProps) {
     gaEvent("add_to_cart", {
       items: [
         {
+          item_id: product.id,
           item_name: values.name,
+          item_brand: product.company.join(", "),
           item_category: values.category || undefined,
           item_variant: values.size || undefined,
           quantity: parseInt(values.quantity, 10),
