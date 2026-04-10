@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Open_Sans, Montserrat, Roboto } from "next/font/google";
-import "./globals.css";
+// import "@/app/globals.css";
 import { cn } from "../lib/utils";
 import Script from "next/script";
 
@@ -9,9 +9,7 @@ import { Toaster } from "../components/ui/toaster";
 import { FilterProvider } from "../context/FilterContext";
 import { CartProvider } from "../context/CartContext";
 import Footer from "../components/Footer";
-import LocalBusinessSchema from "@/components/SEO/LocalBusinessSchema";
-import OrganizationSchema from "@/components/SEO/OrganizationSchema";
-import WebsiteSchema from "@/components/SEO/WebsiteSchema";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const openSans = Open_Sans({ subsets: ["latin"], variable: "--font-openSans" });
@@ -108,10 +106,10 @@ export default function RootLayout({
       longitude: -119.0593,
     },
     areaServed: [
-      { "@type": "City", "name": "Santa Paula" },
-      { "@type": "City", "name": "Ventura" },
-      { "@type": "City", "name": "Oxnard" },
-      { "@type": "State", "name": "California" },
+      { "@type": "City", name: "Santa Paula" },
+      { "@type": "City", name: "Ventura" },
+      { "@type": "City", name: "Oxnard" },
+      { "@type": "State", name: "California" },
     ],
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
@@ -183,6 +181,7 @@ export default function RootLayout({
           </noscript>
         )}
         <div className="flex-grow min-h-screen">
+          <Analytics />
           <Providers>
             <FilterProvider>
               <CartProvider>{children}</CartProvider>
